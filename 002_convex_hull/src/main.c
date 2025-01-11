@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include <stdlib.h> // for rand()
+#include <time.h> // for srand()
+
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
@@ -60,15 +63,20 @@ int main(int argc, char * argv[])
     myRect->w = 100;
     myRect->h = 100;
     
-    SDL_Point points[] = {
-	{100, 100},
-	{200, 150},
-	{300, 200},
-	{400, 250},
-	{500, 300}
-    };
+    int numPoints = 20;
+    //int numPoints = sizeof(points) / sizeof(points[0]);
+    SDL_Point points[numPoints];
 
-    int numPoints = sizeof(points) / sizeof(points[0]);
+    // initialize the random number generator
+    srand((unsigned)time(0)); 
+
+    for(int i=0;i<numPoints;i++){
+	int x = rand() % 800;
+	int y = rand() % 600;
+
+	points[i].x = x;
+	points[i].y = y;
+    }
 
     SDL_Event event;
     bool running = true;

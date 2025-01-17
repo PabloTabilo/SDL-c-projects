@@ -11,7 +11,7 @@
 
 #include <stdlib.h> // for rand()
 #include <time.h> // for srand()
-		  //
+
 #include "initializeSDL.h"
 #include "Circle.h"
 
@@ -22,10 +22,10 @@ const char * TITLE = "convex hull project";
 
 int main(int argc, char * argv[])
 {
-    initializeSDL i(title, SCREEN_WIDTH, SCREEN_HEIGHT);
-    auto [window, renderer] = i.init();
+    SDL_Window * window = NULL;
+    SDL_Renderer * renderer = NULL;
 
-    if(!(window && renderer)){
+    if(!initSDL(TITLE, SCREEN_WIDTH, SCREEN_HEIGHT, &window, &renderer)){
 	return 1;
     }
 
@@ -43,7 +43,8 @@ int main(int argc, char * argv[])
 	points[i].y = y;
     }
     
-    Circle cir(10);
+    Circle circleRender;
+    CircleInit(&circleRender, 10);  
 
     SDL_Event event;
     bool running = true;
@@ -57,8 +58,8 @@ int main(int argc, char * argv[])
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 
-	for(auto p : points){
-	    cir.DrawCircle(renderer, p.y, p.x);
+	for(int i=0; i < numPoints; i++){
+	    DrawCircle(&circleRender, renderer, points[i].y, points[i].x);
 	}
 
 	SDL_RenderPresent(renderer);
@@ -67,7 +68,6 @@ int main(int argc, char * argv[])
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    free(myRect);
     SDL_Quit();
 
     return 0;

@@ -10,14 +10,13 @@
 
 #include <SDL2/SDL.h>
 
-struct Circle{
+typedef struct {
     int radius;
-    Circle();
-    void midPointCircleAlgorithm(SDL_Renderer * renderer, int cy, int cx, int radius);
-    void DrawCircle(); 
-};
+}Circle;
 
-
+void CircleInit(Circle * circle, int radius);
+void midPointCircleAlgorithm(SDL_Renderer * renderer, int cy, int cx, int radius);
+void DrawCircle(const Circle * circle, SDL_Renderer * renderer, int cy, int cx); 
 
 #endif /* end of include guard CIRCLE_H */
 

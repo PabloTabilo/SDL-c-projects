@@ -6,28 +6,29 @@
 
 #include "Circle.h"
 
-Circle::radius = 5;
-
-Circle::Circle(int radius) : radius(radius){}
-
-void Circle::DrawCircle(SDL * renderer, int cy, int cx){
-    midPointCircleAlgorithm(renderer, cy, cx){
+void CircleInit(Circle * circle, int radius){
+    circle->radius = radius;
 }
 
-void Circle::midPointCircleAlgorithm(SDL * renderer, int cy, int cx){
+void DrawCircle(const Circle * circle, SDL_Renderer * renderer, int cy, int cx){
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    midPointCircleAlgorithm(renderer, cy, cx, circle->radius);
+}
+
+void midPointCircleAlgorithm(SDL_Renderer * renderer, int cy, int cx, int radius){
     int y = 0;
     int x = radius;
     int radiusError = 1 - x;
     while(x >= y){
-	SDL_RendererDrawPoint(renderer, cx + x, cy + y);
-	SDL_RendererDrawPoint(renderer, cx - x, cy + y);
-	SDL_RendererDrawPoint(renderer, cx + x, cy - y);
-	SDL_RendererDrawPoint(renderer, cx - x, cy - y);
+	SDL_RenderDrawPoint(renderer, cx + x, cy + y);
+	SDL_RenderDrawPoint(renderer, cx - x, cy + y);
+	SDL_RenderDrawPoint(renderer, cx + x, cy - y);
+	SDL_RenderDrawPoint(renderer, cx - x, cy - y);
 
-	SDL_RendererDrawPoint(renderer, cx + y, cy + x);
-	SDL_RendererDrawPoint(renderer, cx - y, cy + x);
-	SDL_RendererDrawPoint(renderer, cx + y, cy - x);
-	SDL_RendererDrawPoint(renderer, cx - y, cy - x);
+	SDL_RenderDrawPoint(renderer, cx + y, cy + x);
+	SDL_RenderDrawPoint(renderer, cx - y, cy + x);
+	SDL_RenderDrawPoint(renderer, cx + y, cy - x);
+	SDL_RenderDrawPoint(renderer, cx - y, cy - x);
 
 	y++;
 	// midpoint inside circle

@@ -6,15 +6,18 @@ LIBS = -lmingw32 -lSDL2main -lSDL2
 
 # Directories and Files
 SRC_DIR = src
-SRC = $(SRC_DIR)/main.c
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:.c=.o)               # Replace .c with .o for object files
 TARGET = main
 
 # Build Rules
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	del $(TARGET).exe
 

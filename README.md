@@ -26,13 +26,31 @@ C:.
 
 * The `Makefile` allows easy compilation of the project files!
 
-## Project 001 - A simple Tv distortion 
+## Project 001 - A simple Tv distortion - Learn to use SDL 
 This project demonstrates how to manipulate pixels on the screen using the surface pointer in SDL.
 ### New Concepts learned or reforced
 * Proper usage of pointers (`*`).
 * Using the [SDL2](https://wiki.libsdl.org/SDL2/SDL_CreateWindow) API.
 ### Results
 <img src="./assets/images/print_random_points_on_screen.PNG" width="800">
+
+## Project 002 - ConvexHull
+
+### Objectives, Learning outcomes and technical Skills Acquired
+* Build your own algorithm and data structures
+* Create and manage Stack data structure
+* Vectors operations, in this case, cross product
+* Logic behind and how implement the convex algorithm
+* All the logic and implementation behind for create figures
+    * middle point algorithm was used for build circles
+* Design and implement animations for visualizing the construction of the Convex Hull.
+* Dynamic memory managment (malloc, free).
+* Passing pointers and references.
+* Implement own sort algorithms based on the Struct of points and create owner rules for decide how sort the elements, in this case, using cross product with a point reference.
+
+### Results
+<img src="./assets/gifs/convexHull.gif" width="800">
+
 
 ## References and interesting links
 * Other tutorials i plan check: https://www.parallelrealities.co.uk/tutorials/

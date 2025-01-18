@@ -15,9 +15,6 @@ int crossProduct(SDL_Point ref, SDL_Point p1, SDL_Point p2){
     int x2 = p2.x;
     int y2 = p2.y;
 
-    int width = la->width;
-    int height = la->height;
-    
     // adjust reference 0,0 -> mid, mid
     x1 -= ref.x;
     y1 -= ref.y;
@@ -29,5 +26,5 @@ int crossProduct(SDL_Point ref, SDL_Point p1, SDL_Point p2){
 
     if(area < 0) return -1; // clockwise
     else if(area > 0) return 1; // counter-clockwise
-    return 0 // collinear
+    return 0; // collinear
 }

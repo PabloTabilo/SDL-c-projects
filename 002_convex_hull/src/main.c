@@ -14,6 +14,7 @@
 
 #include "initializeSDL.h"
 #include "Circle.h"
+#include "ConvexHull.h";
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -64,6 +65,10 @@ int main(int argc, char * argv[])
 
 	SDL_RenderPresent(renderer);
 	SDL_Delay(100);
+	ConvexHull_scan(renderer, points, numPoints);	
+	printf("finish convex hull!");
+	SDL_Delay(5000);
+
     }
 
     SDL_DestroyRenderer(renderer);

@@ -8,7 +8,11 @@
 
 #define CONVEXHULL_H
 
-void ConvexHull_scan(SDL_Point * points, int sz);
+void mergeSort(SDL_Point * points, int l, int mid, int r, SDL_Point * ref);
+void sortByAngles(SDL_Point * points, int l, int r, SDL_Point * ref);
+int getMinYPoint(SDL_Point * points, int sz);
+void swap(SDL_Point * points, int i, int j);
+void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz);
 
 
 

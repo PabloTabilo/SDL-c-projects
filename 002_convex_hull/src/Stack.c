@@ -20,7 +20,7 @@ bool Stack_IsFull(const Stack * stack){
     return stack->top == MAX_STACK_SIZE-1;
 }
 
-bool Stack_Push(const Stack * stack, int val){
+bool Stack_Push(Stack * stack, int val){
     if(Stack_IsFull(stack)){
 	printf("Stack overflow\n");
 	return false;
@@ -29,12 +29,12 @@ bool Stack_Push(const Stack * stack, int val){
     return true;
 }
 
-bool Stack_Pop(const Stack * stack, int * val){
+bool Stack_Pop(Stack * stack, int * val){
     if(Stack_IsEmpty(stack)){
 	printf("Stack underflow\n");
 	return false;
     }
-    *val = stack->[data[stack->top--]];
+    *val = stack->data[stack->top--];
     return true;
 }
 

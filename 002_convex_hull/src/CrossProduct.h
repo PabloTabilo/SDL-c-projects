@@ -10,7 +10,7 @@
 
 #include <SDL2/SDL.h>
 
-int crossProduct(SDL_Point ref, SDL_Point p1, SDL_Point p2);
+int CrossProduct(SDL_Point ref, SDL_Point p1, SDL_Point p2);
 
 
 #endif /* end of include guard CROSSPRODUCT_H */

@@ -8,6 +8,8 @@
 
 #define STACK_H
 
+#include <stdbool.h>
+
 #define MAX_STACK_SIZE 1000
 
 typedef struct{
@@ -18,8 +20,8 @@ typedef struct{
 void Stack_Init(Stack * stack);
 bool Stack_IsEmpty(const Stack * stack);
 bool Stack_IsFull(const Stack * stack);
-bool Stack_Push(const Stack * stack, int val);
-bool Stack_Pop(const Stack * stack, int * val);
+bool Stack_Push(Stack * stack, int val);
+bool Stack_Pop(Stack * stack, int * val);
 int Stack_Peek(const Stack * stack);
 
 #endif /* end of include guard STACK_H */

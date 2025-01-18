@@ -8,6 +8,10 @@
 
 #define CONVEXHULL_H
 
+#include <SDL2/SDL.h>
+#include "Stack.h"
+#include "CrossProduct.h"
+
 void mergeSort(SDL_Point * points, int l, int mid, int r, SDL_Point * ref);
 void sortByAngles(SDL_Point * points, int l, int r, SDL_Point * ref);
 int getMinYPoint(SDL_Point * points, int sz);

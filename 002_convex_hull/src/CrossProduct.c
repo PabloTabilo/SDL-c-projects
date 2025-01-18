@@ -8,7 +8,7 @@
 
 // p1 is on hull
 // p2 is a candidate
-int crossProduct(SDL_Point ref, SDL_Point p1, SDL_Point p2){
+int CrossProduct(SDL_Point ref, SDL_Point p1, SDL_Point p2){
     int x1 = p1.x;
     int y1 = p1.y;
 

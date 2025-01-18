@@ -14,7 +14,7 @@
 
 #include "initializeSDL.h"
 #include "Circle.h"
-#include "ConvexHull.h";
+#include "ConvexHull.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720

@@ -114,44 +114,45 @@ void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
     SDL_RenderPresent(renderer);
     SDL_Delay(500);
 
-    SDL_point p;
-    SDL_point peek;
+    SDL_Point p = {0, 0};
+    SDL_Point peek = {0, 0};
+    
     for(int i = 2; i < sz; i++){
 	SDL_Point nxt = points[i];
 
 	Stack_Pop(&stackX, &p.x);
 	Stack_Pop(&stackY, &p.y);
 	
-	Stack_Peek(&stackX, &peek.x);
-	Stack_Peek(&stackY, &peek.y);
+	peek.x = Stack_Peek(&stackX);
+	peek.y = Stack_Peek(&stackY);
 
-	while(!Stack_IsEmpty(stackX) && CrossProduct(peek, p, nxt) <= 0){
+	while(!Stack_IsEmpty(&stackX) && CrossProduct(peek, p, nxt) <= 0){
 	    // this clear is only for animation purpose
 	    // in principle we drop the point
 	    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	    SDL_RendererDrawLine(renderer, peek.x, peek.y, p.x, p.y);
+	    SDL_RenderDrawLine(renderer, peek.x, peek.y, p.x, p.y);
 	    SDL_RenderPresent(renderer);
 	    SDL_Delay(500);
 	    
 	    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	    SDL_RendererDrawLine(renderer, peek.x, peek.y, p.x, p.y);
+	    SDL_RenderDrawLine(renderer, peek.x, peek.y, p.x, p.y);
 	    SDL_RenderPresent(renderer);
 	    SDL_Delay(500);
 
 	    Stack_Pop(&stackX, &p.x);
 	    Stack_Pop(&stackY, &p.y);
 
-	    if(Stack_IsEmpty()) break;
+	    if(Stack_IsEmpty(&stackX)) break;
 	    
-	    Stack_Peek(&stackX, &peek.x);
-	    Stack_Peek(&stackY, &peek.y);
+	    peek.x = Stack_Peek(&stackX);
+	    peek.y = Stack_Peek(&stackY);
 	}
 
 	Stack_Push(&stackX, p.x);
 	Stack_Push(&stackY, p.y);
 
-	Stack_push(&stackX, points[i].x);
-	Stack_push(&stackY, points[i].y);
+	Stack_Push(&stackX, points[i].x);
+	Stack_Push(&stackY, points[i].y);
 
 	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	SDL_RenderDrawLine(renderer, p.x, p.y, points[i].x, points[i].y);
@@ -163,16 +164,16 @@ void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
     Stack_Pop(&stackX, &p.x);
     Stack_Pop(&stackY, &p.y);
 
-    Stack_Peek(&stackX, &peek.x);
-    Stack_Peek(&stackY, &peek.y);
-    
+    peek.x = Stack_Peek(&stackX);
+    peek.y = Stack_Peek(&stackY);
+
     if(CrossProduct(peek, p, min_point) > 0){
 	Stack_Push(&stackX, p.x);
 	Stack_Push(&stackY, p.y);
     }
     
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    SDL_RenderDrawLine(renderer, p.x, p.y, points[i].x, points[i].y);
+    SDL_RenderDrawLine(renderer, p.x, p.y, peek.x, peek.y);
     SDL_RenderPresent(renderer);
     SDL_Delay(500);
 }

@@ -5,8 +5,6 @@
  */
 
 #include "ConvexHull.h"
-#include "Stack.h"
-#include "CrossProduct.h"
 
 void mergeSort(SDL_Point * points, int l, int mid, int r, SDL_Point * ref){
     int szi = mid - l + 1;
@@ -31,6 +29,7 @@ void mergeSort(SDL_Point * points, int l, int mid, int r, SDL_Point * ref){
 	// i prefer counter-clockwise 
 	int cross = CrossProduct(*ref, left[i], right[j]); 
 	// i and j are collinear
+	// So the value more near to reference must be go first
 	if(cross == 0){
 	    int distLeft = (left[i].x - ref->x) * (left[i].x - ref->x) + (left[i].y - ref->y) * (left[i].y - ref->y);
 	    int distRight = (right[j].x - ref->x) * (right[j].x - ref->x) + (right[j].y - ref->y) * (right[j].y - ref->y);
@@ -90,11 +89,16 @@ void swap(SDL_Point * points, int i, int j){
     points[j] = temp;
 }
 
-void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
+void ConvexHull_scan(SDL_Point * points, int sz, LineRender * lines, int *lineCnt){
+    *lineCnt = 0;
+    // more debug
+    // printf("Initial Points: \n");for(int i = 0; i < sz; i++) printf("{%i, %i}", points[i].y, points[i].x); printf("\n");
     int idx = getMinYPoint(points, sz); 
     SDL_Point min_point = points[idx];    
     swap(points, 0, idx);
     sortByAngles(points, 0, sz-1, &min_point);
+    // more debug
+    // printf("Points after Sort \n");for(int i = 0; i < sz; i++) printf("{%i, %i}", points[i].y, points[i].x); printf("\n");
     // I need think on this part
     // may be change stack to SDL_Point or use coords? what's more easy?
     Stack stackX;
@@ -108,11 +112,8 @@ void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
 
     Stack_Push(&stackX, points[1].x); 
     Stack_Push(&stackY, points[1].y);
-    
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[1].x, points[1].y);
-    SDL_RenderPresent(renderer);
-    SDL_Delay(500);
+
+    lines[(*lineCnt)++] = (LineRender){points[0].x, points[0].y, points[1].x, points[1].y, 1};
 
     SDL_Point p = {0, 0};
     SDL_Point peek = {0, 0};
@@ -129,15 +130,10 @@ void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
 	while(!Stack_IsEmpty(&stackX) && CrossProduct(peek, p, nxt) <= 0){
 	    // this clear is only for animation purpose
 	    // in principle we drop the point
-	    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	    SDL_RenderDrawLine(renderer, peek.x, peek.y, p.x, p.y);
-	    SDL_RenderPresent(renderer);
-	    SDL_Delay(500);
 	    
-	    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	    SDL_RenderDrawLine(renderer, peek.x, peek.y, p.x, p.y);
-	    SDL_RenderPresent(renderer);
-	    SDL_Delay(500);
+	    lines[(*lineCnt)++] = (LineRender){peek.x, peek.y, p.x, p.y, 2};
+	    lines[(*lineCnt)++] = (LineRender){peek.x, peek.y, p.x, p.y, 0};
+	    
 
 	    Stack_Pop(&stackX, &p.x);
 	    Stack_Pop(&stackY, &p.y);
@@ -154,10 +150,7 @@ void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
 	Stack_Push(&stackX, points[i].x);
 	Stack_Push(&stackY, points[i].y);
 
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	SDL_RenderDrawLine(renderer, p.x, p.y, points[i].x, points[i].y);
-	SDL_RenderPresent(renderer);
-	SDL_Delay(500);
+	lines[(*lineCnt)++] = (LineRender){p.x, p.y, points[i].x, points[i].y, 1};
     }
 
     // the last can be collinear
@@ -172,13 +165,8 @@ void ConvexHull_scan(SDL_Renderer * renderer, SDL_Point * points, int sz){
 	Stack_Push(&stackY, p.y);
     }
     
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    SDL_RenderDrawLine(renderer, p.x, p.y, peek.x, peek.y);
-    SDL_RenderPresent(renderer);
-    SDL_Delay(500);
+    lines[(*lineCnt)++] = (LineRender){p.x, p.y, min_point.x, min_point.y, 1};
 }
-
-
 
 
 

@@ -12,14 +12,22 @@
 #include <stdlib.h> // for rand()
 #include <time.h> // for srand()
 
+#include "config.h"
+
 #include "initializeSDL.h"
 #include "Circle.h"
+#include "LineRender.h"
+
 #include "ConvexHull.h"
 
-#define SCREEN_WIDTH 1280
+#define SCREEN_WIDTH 980
 #define SCREEN_HEIGHT 720
+#define MAX_LINES 1000
 
 const char * TITLE = "convex hull project";
+const int GAP = 50;
+int numPoints = 20;
+int lineCnt;
 
 int main(int argc, char * argv[])
 {
@@ -30,19 +38,11 @@ int main(int argc, char * argv[])
 	return 1;
     }
 
-    int numPoints = 20;
     //int numPoints = sizeof(points) / sizeof(points[0]);
     SDL_Point points[numPoints];
+    LineRender lines[MAX_LINES];
     // initialize the random number generator
     srand((unsigned)time(0)); 
-
-    for(int i=0;i<numPoints;i++){
-	int x = rand() % 800;
-	int y = rand() % 600;
-
-	points[i].x = x;
-	points[i].y = y;
-    }
     
     Circle circleRender;
     CircleInit(&circleRender, 10);  
@@ -56,19 +56,37 @@ int main(int argc, char * argv[])
 		break;
 	    }
 	}
+	// clear screen
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
+	
+	// all the algorithms and data structures
+	for(int i=0;i<numPoints;i++){
+	    int x = rand() % 800 + GAP;
+	    int y = rand() % 600 + GAP;
+	    points[i].x = x;
+	    points[i].y = y;
+	}
+	ConvexHull_scan(points, numPoints, lines, &lineCnt);	
 
+	// Draw Points
 	for(int i=0; i < numPoints; i++){
 	    DrawCircle(&circleRender, renderer, points[i].y, points[i].x);
 	}
-
-	SDL_RenderPresent(renderer);
-	SDL_Delay(100);
-	ConvexHull_scan(renderer, points, numPoints);	
-	printf("finish convex hull!");
-	SDL_Delay(5000);
-
+	// draw edges	
+	for(int i=0; i < lineCnt; i++){
+	    if(lines[i].state == 1){
+		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	    }else if(lines[i].state == 2){
+		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	    }else{
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	    }
+	    SDL_RenderDrawLine(renderer, lines[i].x1, lines[i].y1, lines[i].x2, lines[i].y2);
+	    SDL_RenderPresent(renderer);
+	    SDL_Delay(MY_DELAY);
+	}
+	SDL_Delay(MY_DELAY*10);
     }
 
     SDL_DestroyRenderer(renderer);

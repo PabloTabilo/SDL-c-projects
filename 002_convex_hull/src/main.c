@@ -3,7 +3,7 @@
  * @file        : main
  * @created     : Thursday Jan 09, 2025 00:36:15 Pacific SA Daylight Time
  */
-
+#define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -4,9 +4,8 @@
  * @created     : Friday Jan 17, 2025 19:35:14 Pacific SA Daylight Time
  */
 
-#include "Stack.h"
 #include <stdio.h>
-
+#include "Stack.h"
 
 void Stack_Init(Stack * stack){
     stack->top = -1;

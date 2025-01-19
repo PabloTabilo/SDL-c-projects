@@ -51,6 +51,87 @@ This project demonstrates how to manipulate pixels on the screen using the surfa
 ### Results
 <img src="./assets/gifs/convexHull.gif" width="800">
 
+### Structure Project for ConvexHull
+```bash
+│   Makefile
+│   SDL2.dll
+│
+├───build
+│   ├───bin
+│   │       main.exe
+│   │       SDL2.dll
+│   │       test_test_Circle.exe
+│   │       test_test_ConvexHull.exe
+│   │       test_test_mergeSort.exe
+│   │       test_test_Stack.exe
+│   │
+│   └───obj
+│       │   main.o
+│       │
+│       ├───algorithms
+│       │       ConvexHull.o
+│       │       mergeSort.o
+│       │
+│       ├───data-structure
+│       │       Stack.o
+│       │
+│       ├───geometry
+│       │       Circle.o
+│       │       CrossProduct.o
+│       │
+│       └───init
+│               initializeSDL.o
+│
+├───include
+│   │   Circle.h
+│   │   config.h
+│   │   ConvexHull.h
+│   │   CrossProduct.h
+│   │   initializeSDL.h
+│   │   LineRender.h
+│   │   mergeSort.h
+│   │   Stack.h
+│   │
+│   └───SDL2
+│
+├───lib
+│   │   libSDL2.a
+│   │   libSDL2.dll.a
+│   │   libSDL2.la
+│   │   libSDL2main.a
+│   │   libSDL2main.la
+│   │   libSDL2_test.a
+│   │   libSDL2_test.la
+│   │
+│   ├───cmake
+│   │   └───SDL2
+│   │
+│   └───pkgconfig
+│           sdl2.pc
+│
+└───src
+    │   main.c
+    │
+    ├───algorithms
+    │       ConvexHull.c
+    │       mergeSort.c
+    │
+    ├───data-structure
+    │       Stack.c
+    │
+    ├───geometry
+    │       Circle.c
+    │       CrossProduct.c
+    │
+    ├───init
+    │       initializeSDL.c
+    │
+    └───tests
+            test_Circle.c
+            test_ConvexHull.c
+            test_mergeSort.c
+            test_Stack.c
+```
 
 ## References and interesting links
 * Other tutorials i plan check: https://www.parallelrealities.co.uk/tutorials/

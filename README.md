@@ -1,7 +1,15 @@
 # SDL-c-projects
 My objective is get better on C doing different projects.
 
-## General project's structure
+## Project 001 - A simple Tv distortion - Learn to use SDL 
+This project demonstrates how to manipulate pixels on the screen using the surface pointer in SDL.
+### New Concepts learned or reforced
+* Proper usage of pointers (`*`).
+* Using the [SDL2](https://wiki.libsdl.org/SDL2/SDL_CreateWindow) API.
+### Results
+<img src="./assets/images/print_random_points_on_screen.PNG" width="800">
+
+### General project's structure for learning phase
 
 ```bash
 C:.
@@ -26,14 +34,6 @@ C:.
 
 * The `Makefile` allows easy compilation of the project files!
 
-## Project 001 - A simple Tv distortion - Learn to use SDL 
-This project demonstrates how to manipulate pixels on the screen using the surface pointer in SDL.
-### New Concepts learned or reforced
-* Proper usage of pointers (`*`).
-* Using the [SDL2](https://wiki.libsdl.org/SDL2/SDL_CreateWindow) API.
-### Results
-<img src="./assets/images/print_random_points_on_screen.PNG" width="800">
-
 ## Project 002 - ConvexHull
 
 ### Objectives, Learning outcomes and technical Skills Acquired
@@ -53,34 +53,14 @@ This project demonstrates how to manipulate pixels on the screen using the surfa
 
 ### Structure Project for ConvexHull
 ```bash
+C:.
 │   Makefile
 │   SDL2.dll
 │
 ├───build
 │   ├───bin
-│   │       main.exe
-│   │       SDL2.dll
-│   │       test_test_Circle.exe
-│   │       test_test_ConvexHull.exe
-│   │       test_test_mergeSort.exe
-│   │       test_test_Stack.exe
 │   │
 │   └───obj
-│       │   main.o
-│       │
-│       ├───algorithms
-│       │       ConvexHull.o
-│       │       mergeSort.o
-│       │
-│       ├───data-structure
-│       │       Stack.o
-│       │
-│       ├───geometry
-│       │       Circle.o
-│       │       CrossProduct.o
-│       │
-│       └───init
-│               initializeSDL.o
 │
 ├───include
 │   │   Circle.h
@@ -95,19 +75,6 @@ This project demonstrates how to manipulate pixels on the screen using the surfa
 │   └───SDL2
 │
 ├───lib
-│   │   libSDL2.a
-│   │   libSDL2.dll.a
-│   │   libSDL2.la
-│   │   libSDL2main.a
-│   │   libSDL2main.la
-│   │   libSDL2_test.a
-│   │   libSDL2_test.la
-│   │
-│   ├───cmake
-│   │   └───SDL2
-│   │
-│   └───pkgconfig
-│           sdl2.pc
 │
 └───src
     │   main.c

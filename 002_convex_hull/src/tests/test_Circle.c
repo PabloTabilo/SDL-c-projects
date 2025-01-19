@@ -42,8 +42,12 @@ void test_DrawCircle(void) {
         return;
     }
 
+    printf("Possible load window and render\n");
+
     Circle circle;
     CircleInit(&circle, 20);
+
+    printf("radius = %d\n",circle.radius);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Black background
     SDL_RenderClear(renderer);
@@ -54,7 +58,8 @@ void test_DrawCircle(void) {
     for(int i=0;i<cirCnt;i++){
 	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	SDL_RenderDrawPoint(renderer, cirPoints[i].x, cirPoints[i].y);
-	SDL_Delay(400);
+	SDL_RenderPresent(renderer);
+	SDL_Delay(100);
     }
 
     SDL_RenderPresent(renderer);

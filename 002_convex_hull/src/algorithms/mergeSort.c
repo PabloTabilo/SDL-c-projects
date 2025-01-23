@@ -39,9 +39,8 @@ void mergeSort(SDL_Point * points, int l, int mid, int r, SDL_Point * ref){
 		points[k++] = right[j++];
 	    }
 	}
-	// i is counter-clowise to j
-	// so i is corrected ubicate
-	// try not to lose the info of "j"
+	// i is clowise to j
+	// so j is first
 	else if(cross == -1){
 	    points[k++] = right[j++];
 	}

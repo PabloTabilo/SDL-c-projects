@@ -99,6 +99,14 @@ C:.
             test_mergeSort.c
             test_Stack.c
 ```
+* `include/`: Contains all the .h header files, such as `Circle.h`, `ConvexHull.h`, and others.
+* `src/main.c`: The main file where all modules come together to create the Convex Hull project.
+* `algorithms/`: Houses the implementations for the Convex Hull and Merge Sort algorithms.
+* `data-structure/`: Contains the Stack implementation, the only data structure we need for this project.
+* `geometry/`: Includes the Circle struct and the Cross Product implementation.
+* `init/`: Provides the SDL2 initializer to keep everything organized and clean.
+* `tests/`: Contains simple unit tests for the major components of the project.
+
 
 ## References and interesting links
 * Other tutorials i plan check: https://www.parallelrealities.co.uk/tutorials/

@@ -6,10 +6,9 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // for rand()
 #include <stdbool.h>
 
-#include <stdlib.h> // for rand()
 #include <time.h> // for srand()
 
 #include "config.h"
@@ -59,7 +58,6 @@ int main(int argc, char * argv[])
 	// clear screen
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
-	
 	// all the algorithms and data structures
 	for(int i=0;i<numPoints;i++){
 	    int x = rand() % 800 + GAP;
@@ -68,7 +66,6 @@ int main(int argc, char * argv[])
 	    points[i].y = y;
 	}
 	ConvexHull_scan(points, numPoints, lines, &lineCnt);	
-
 	// Draw Points
 	for(int i=0; i < numPoints; i++){
 	    DrawCircle(&circleRender, renderer, points[i].y, points[i].x);
@@ -88,11 +85,9 @@ int main(int argc, char * argv[])
 	}
 	SDL_Delay(MY_DELAY*10);
     }
-
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-
     return 0;
 }
 
